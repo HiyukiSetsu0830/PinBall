@@ -50,6 +50,20 @@ public class BallController : MonoBehaviour {
     //ボールがオブジェクトに当たった時のスコア処理
     private void OnCollisionEnter(Collision collision) {
 
+        scoreCollision(collision);
+
+    }
+
+    //スコア処理
+    public void scorePlus(int point) {
+
+        score += point;
+        this.scoreText.GetComponent<Text>().text = "Score: " + score;
+
+    }
+
+    public void scoreCollision(Collision collision) {
+
         //各タグの衝突判定を代入
         var isSmallStar = collision.gameObject.CompareTag(smallStarTag);
         var isLargeStar = collision.gameObject.CompareTag(largeStarTag);
@@ -61,13 +75,5 @@ public class BallController : MonoBehaviour {
         if (isLargeStar) scorePlus(isLargeStarScore);
         if (isSmallCloud) scorePlus(isSmallCloudScore);
         if (isLargeCloud) scorePlus(isLargeCloudScore);
-
-    }
-    //スコア処理
-    public void scorePlus(int point) {
-
-        score += point;
-        this.scoreText.GetComponent<Text>().text = "Score: " + score;
-
     }
 }
